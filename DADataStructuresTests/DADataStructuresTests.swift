@@ -9,28 +9,40 @@
 import XCTest
 @testable import DADataStructures
 
+private struct Constants {
+    static let MaxItems = 100_000
+}
+
 class DADataStructuresTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testStack() {
+        let stopwatch = Stopwatch()
+        let stack = DAStack<Int>()
+        for i in 0..<Constants.MaxItems {
+            stack.push(item: i)
         }
+        print("Stack")
+        stopwatch.printElapsedTime()
     }
     
+    func testArrayStack() {
+        let stopwatch = Stopwatch()
+        let stack = DAArrayStack<Int>()
+        for i in 0..<Constants.MaxItems {
+            stack.push(item: i)
+        }
+        print("Array Stack")
+        stopwatch.printElapsedTime()
+    }
+}
+
+private class Stopwatch {
+    private var date = Date()
+    var elapsedTime: TimeInterval {
+        return NSDate().timeIntervalSince(date)
+    }
+    
+    func printElapsedTime() {
+        print("Elapsed Time (seconds): ", elapsedTime)
+    }
 }
